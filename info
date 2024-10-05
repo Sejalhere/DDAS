@@ -1,0 +1,41 @@
+
+1. Redis Server Setup
+Hey team, before we integrate the Redis module, let’s ensure that the Redis server is properly set up and running:
+
+- For local development: If Redis is running on our individual machines, the current configuration (`localhost:6379`) should work fine. Please confirm if Redis is installed on your local systems.
+
+- For a remote server: If we’re hosting Redis on a separate server, we’ll need to update the `host` and `port` in the Redis connection setup. Can someone check and confirm where Redis will be hosted and ensure the configuration aligns with the rest of the project?
+
+Let me know if anyone needs help with installation or setup.
+
+---
+
+ 2. Frontend & Backend Integration
+We need to make sure the frontend and backend are integrated with the Redis code:
+
+- Frontend: The Redis module works when file content is uploaded via an API call. We need the frontend to handle file uploads and send the file data (e.g., to the `/upload_file/` endpoint). Could the frontend team confirm they have an upload system set up for this?
+  if using html you must have this code inside ;<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file">
+    <button type="submit">Upload File</button>
+</form>
+if using react you must have this
+<input type="file" onChange={handleFileUpload} />
+
+- Backend: The backend needs to handle file storage and send metadata (file path, server name, dataset name) to Redis. Ensure that when files are uploaded, this metadata is passed to the Redis functions, specifically to `store_file_metadata()`. Can the backend team confirm what structure they’re using for file paths and dataset names, so we make sure the Redis module gets accurate data?
+in backend to call store metadata have this ;# Assuming store_file_metadata is imported from the Redis module
+
+def store_file_metadata(file_name, file_path, server_name, dataset_name):
+    # Redis logic to store metadata goes here
+
+---
+
+3. Naming Convention
+We also need to be consistent with naming across the project:
+
+- File paths: The Redis module assumes we’re passing the correct file path, server, and dataset name for every file uploaded. The backend team should confirm that they’re handling these fields consistently.
+
+- APIs: Let’s ensure the APIs used in the frontend and backend match the structure of the Redis code. The team working on API routes needs to ensure the `/upload_file/` endpoint aligns with the rest of the system.
+
+
+
+These steps will ensure that Redis works correctly within our DDAS system. Let me know if any of this needs clarification or if anyone needs help with their part!
